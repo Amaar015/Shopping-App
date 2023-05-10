@@ -6,10 +6,10 @@ const app = express();
 app.get('/', (req, res) => {
     res.send('hello world')
 })
-app.get('/product', (req, res) => {
+app.get('/products', (req, res) => {
     res.json(products)
 })
-app.get('/product/:id', (req, res) => {
+app.get('/products/:id', (req, res) => {
     const product = products.find((p) => p._id === req.params.id)
     res.json(product)
 })
