@@ -1,11 +1,20 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Col, Row, Image, ListGroup, ListGroupItem, Button } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import Rating from '../components/Rating'
-import Product from '../products'
+import axios from 'axios'
+// import Product from '../products'
 const ProductDetails = ({ match }) => {
     const params = useParams()
-    const product = Product.find((p) => p._id === params.id)
+    // const product = Product.find((p) => p._id === params.id)
+    const [product, setProduct] = useState([]);
+    useEffect(() => {
+        const fatchProduct = async () => {
+            const { data } = await axios.get(`/products/${match.params.id}`)
+            setProduct(data);
+        }
+        fatchProduct();
+    }, [])
     return (
         <>
             <Row>
@@ -15,6 +24,7 @@ const ProductDetails = ({ match }) => {
                 <Col md={4}>
                     <ListGroup variant='flush'>
                         <ListGroupItem>
+
                             <h4>{product.name}</h4>
                         </ListGroupItem>
                         <ListGroupItem>

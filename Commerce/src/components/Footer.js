@@ -12,6 +12,7 @@ const Footer = () => {
                                 CopyRight &copy; Abdullah Store
                             </span>
                         </Col>
+
                     </Row>
                 </Container>
             </footer>

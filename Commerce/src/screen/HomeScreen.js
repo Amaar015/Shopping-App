@@ -16,7 +16,7 @@ const HomeScreen = () => {
     useEffect(() => {
         // getProduct()
         const fatchProducts = async () => {
-            const { data } = await axios.get("/product")
+            const { data } = await axios.get("/products")
             // console.log(data)
             setProducts(data)
         };
