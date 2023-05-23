@@ -23,7 +23,7 @@ const productSchema = mongoose.Schema({
     // create a relation with another model in mongo db
     User: {
         type: mongoose.Types.ObjectId,
-        required: true,
+        // required: true,
         ref: 'User'
     },
     name: {
@@ -44,7 +44,7 @@ const productSchema = mongoose.Schema({
     },
     discription: {
         type: String,
-        required: true
+        // required: tr
     },
     review: [reviewSchema],
     rating: {
@@ -61,7 +61,8 @@ const productSchema = mongoose.Schema({
     },
     countStack: {
         type: Number,
-        required: true
+        required: true,
+        default: 0.0
     }
 
 })

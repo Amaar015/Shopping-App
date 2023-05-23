@@ -6,11 +6,11 @@ const products = require('./data/products');
 const User = require('./models/user');
 const Product = require('./models/Product')
 const Order = require('./models/order');
-const connectDB = require('./config/config')
+// const connectDb = require('./config/config')
 require('colors')
 
 dotenv.config();
-connectDB();
+require('./config/config')
 
 const ImportData = async () => {
     try {
@@ -30,10 +30,21 @@ const ImportData = async () => {
         process.exit(1);
     }
 }
-const DestroyDate = async () => {
-    await Order.deleteMany();
-    await User.deleteMany();
-    await Product.deleteMany();
-    console.log(`${error}`.purple.inverse)
-    process.exit();
+const DestroyData = async () => {
+    try {
+        await Order.deleteMany();
+        await User.deleteMany();
+        await Product.deleteMany();
+        console.log(`Date deleted successfully`.green.inverse)
+    } catch (error) {
+        console.log(`${error}`.red.inverse)
+        process.exit();
+    }
+
+}
+
+if (process.argv[2] === '-d') {
+    DestroyData()
+} else {
+    ImportData();
 }

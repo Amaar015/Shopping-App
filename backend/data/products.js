@@ -73,4 +73,4 @@ const products = [
   },
 ]
 
-Smodule.exports = products;
+module.exports = products;
