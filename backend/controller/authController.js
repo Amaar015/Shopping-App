@@ -117,7 +117,7 @@ const LoginController = async (req, res) => {
 const authController = async (req, res) => {
     try {
         const user = await userModel.findById({ _id: req.body.userId });
-        user.password = undefined;
+        // user.password = undefined;
         if (!user) {
             return res.status(200).send({
                 message: "user not found",
@@ -149,7 +149,7 @@ const forgetPasswordController = async (req, res) => {
         if (!question) {
             req.status(400).send({ message: "Question is required" });
         }
-        if (!NewPassword) {
+        if (!Newpassword) {
             req.status(400).send({ message: "Password is required" });
         }
         // check user
@@ -160,11 +160,11 @@ const forgetPasswordController = async (req, res) => {
                 success: false,
             })
         }
-        const hashed = await hashPassword(NewPassword);
+        const hashed = await hashPassword(Newpassword);
         await userModel.findByIdAndUpdate(user._id, { password: hashed })
         res.status(200).send({
             message: "Password reset successfully",
-            success: false,
+            success: true,
 
         })
     } catch (error) {
