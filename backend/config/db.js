@@ -1,10 +1,12 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 dotenv.config();
+
 const colors = require('colors');
 mongoose.set('strictQuery', false);
-mongoose.connect(process.env.MONGO_URL, {
-    useNewUrlParser: true, useUnifiedTopology: true,
+mongoose.connect('mongodb://127.0.0.1:27017/Commerce', {
+    useNewUrlParser: "true",
+    useUnifiedTopology: "true"
 })
     .then(() => {
         console.log(`connection created successfuly ...`.bgGreen.white);

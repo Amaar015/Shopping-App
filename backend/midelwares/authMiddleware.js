@@ -3,18 +3,26 @@ const userModel = require('../models/userModels');
 
 
 
-const requireSignIn = async (req, res, next) => {
-    try {
-        const deode = jwt.verify(
-            req.headers.authorization,
-            process.env.JWT_SECRET
-        )
-        req.user = deode;
-        next();
-    } catch (error) {
-        console.log(error);
-    }
-};
+// const authMiddle = async (req, res, next) => {
+//     try {
+//         const token = req.headers['authorization'].split(" ")[1];
+//         jwt.verify(token, process.env.JWT_SECRET, (error, decode) => {
+//             if (error) {
+//                 return res.status(201).send({
+//                     message: "Auth Failed",
+//                     success: false,
+//                 })
+//             } else {
+//                 req.body.userId = decode.id;
+//                 next();
+//             }
+//         })
+//     } catch (error) {
+//         console.log(error);
+//         res.status(401).send({ message: "Auth Failed", success: falses });
+//     }
+
+// };
 
 // Admin access
 
@@ -35,4 +43,4 @@ const IsAdmin = async (req, res, next) => {
     }
 }
 
-module.exports = { requireSignIn, IsAdmin };
+module.exports = { IsAdmin };
