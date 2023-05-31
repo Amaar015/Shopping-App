@@ -17,8 +17,13 @@
   border-bottom: solid gray !important;
 }
 
+.collapse ul {
+  margin-left: 35rem;
+}
+
 .nav-link {
   font-weight: 300 !important;
+
 }
 
 .active {
@@ -84,4 +89,164 @@ ul li a:hover {
 .pnf-btn:hover {
   background-color: black;
   color: white;
+}
+
+/* Contact Page */
+
+.container-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3rem;
+  padding: 4rem 5%;
+}
+
+.img {
+  flex: 1 1 30rem;
+
+}
+
+.img>img {
+  width: 100%;
+  height: 100%;
+}
+
+.content {
+  flex: 1 1 30rem;
+}
+
+.content h1 {
+  background: #333;
+  width: 300px;
+  text-align: center;
+  color: white;
+  text-transform: uppercase;
+  padding-bottom: 0.5rem;
+}
+
+.content p {
+  color: #333;
+  font-size: 1.2rem;
+}
+
+/* form */
+
+
+.form {
+  /* position: absolute; */
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 500px;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem auto;
+  /* background: #333; */
+  /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
+}
+
+.form h1 {
+  font-size: 2.3rem;
+  font-weight: lighter;
+  /* margin-top: -4rem; */
+  background: #333;
+  color: #fff;
+  width: 500px;
+  text-align: center;
+  padding: 0.5rem 0.4rem;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 4px 5px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: linear-gradient(0deg, #ffdee9 0%, #b5fffc 100%);
+  padding: 40px;
+  border-radius: 2rem;
+}
+
+form>label {
+  font-size: 1.3rem;
+  letter-spacing: 0.1rem;
+  padding-bottom: 0.3rem;
+  padding-top: 0.5rem;
+}
+
+form>input {
+  outline: none;
+  border: none;
+  border-radius: 0.5rem;
+  background: #eee;
+  padding: 0.5rem 1rem;
+  font-size: 1.1rem;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 4px 3px;
+
+}
+
+form>button {
+  margin-top: 1.5rem;
+}
+
+
+/* Spiner */
+
+
+.spinner {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  /* margin: 0rem auto; */
+  background: #333;
+}
+
+.admin {
+  position: absolute;
+  top: 0.5rem;
+  left: 90%;
+  margin-left: 2rem;
+  text-transform: capitalize;
+  margin-top: 0.5rem;
+
+}
+
+.admin a {
+  text-decoration: none;
+  color: #333;
+}
+
+
+@media(max-width:1290px) {
+  .collapse ul {
+    margin-left: 30rem;
+  }
+}
+
+@media(max-width:1024px) {
+  .collapse ul {
+    margin-left: 18rem;
+  }
+
+  .admin {
+    left: 84% !important;
+  }
+
+}
+
+@media(max-width:620px) {
+
+  .admin {
+    left: 75% !important;
+  }
+
+}
+
+@media(max-width:400px) {
+
+  .admin {
+    left: 63% !important;
+  }
+
 }
