@@ -2,29 +2,27 @@ import React, { useState } from 'react'
 import Layout from '../../Components/Layout/Layout'
 import '../../index.css'
 import axios from 'axios';
-import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import toast from "react-hot-toast";
 import { useDispatch } from 'react-redux';
 import { showLoading, hideLoading } from '../../Redux/features/alertSlice';
 const ForgotPass = () => {
     const disptach = useDispatch();
     const [email, setemail] = useState("")
-    const [password, setpassword] = useState("")
+    const [Newpassword, setpassword] = useState("")
     const [question, setquestion] = useState('')
     const navigate = useNavigate();
-    const location = useLocation();
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
             disptach(showLoading());
             const res = await axios.post('/api/v1/auth/forget-password', {
-                email, password, question
+                email, Newpassword, question
             })
             disptach(hideLoading())
             if (res.data.success) {
-                localStorage.setItem('token', res.data.token)
-                toast.success('Login Successfully')
+                toast.success('Password Reset successfully')
                 navigate('/login')
             } else {
                 toast.error(res.data.message)
@@ -61,9 +59,9 @@ const ForgotPass = () => {
                         placeholder='What is your favorite color?' />
                     <label htmlFor="password">Password</label>
                     <input type="password" name='password'
-                        value={password}
+                        value={Newpassword}
                         onChange={(e) => setpassword(e.target.value)}
-                        placeholder='Password' />
+                        placeholder='Enter new Password' />
                     <button className='btn btn-primary'>Reset Password</button>
                     <Link to='/login' style={{ marginTop: '1rem', textDecoration: "none", fontSize: "1.2rem" }}>Login</Link>
                 </form>

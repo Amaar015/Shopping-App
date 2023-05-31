@@ -1,10 +1,11 @@
 
 import React from 'react'
 import { Link } from 'react-router-dom'
+import '../../index.css'
 const Footer = () => {
     return (
 
-        <div className='bg-dark text-light p-3'>
+        <footer className='bg-dark text-light p-3'>
             <h4 className='text-center'>All Rights Reserved &copy; Amaar Raza</h4>
             <ul className='text-center mt-3'>
                 <li>
@@ -17,7 +18,7 @@ const Footer = () => {
                     <Link to="/policy">Privacy Policy</Link>
                 </li>
             </ul>
-        </div>
+        </footer>
 
     )
 }
