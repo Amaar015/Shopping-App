@@ -1,45 +1,44 @@
 import React from 'react'
-import './adminDash.css'
-import { FaOpencart, FaHome, FaShoppingCart, FaMoneyCheck } from 'react-icons/fa';
-import { MdOutlineUpdate } from 'react-icons/md'
-import { Link } from 'react-router-dom'
-import profile from '../../images/profile.jpeg'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 
 const AdminDashboard = () => {
     const { user } = useSelector(state => state.user)
+    const navigate = useNavigate()
     return (
-        <div className="dashboard">
-            <div className="container-box">
-                <div className="profile">
-                    <Link to='/'>Abdullah Stroe <span><FaOpencart /></span> </Link>
-                    <div className="user-detail">
-                        <img src={profile} alt="" />
-                        <h3>{user?.name}</h3>
-                        <p>{user?.email}</p>
-                    </div>
-                    <div className="admin-navbar">
-                        <ul>
-                            <li>
-                                <Link to='/user-dashboard' > <i><FaHome /></i> Dashboard</Link>
-                            </li>
-                            <li>
-                                <Link to='/user-dashboard' ><i><FaShoppingCart /></i> Cart</Link>
-                            </li>
-                            <li>
-                                <Link to='/user-dashboard' ><i><FaMoneyCheck /></i> Payment History</Link>
-                            </li>
-                            <li>
-                                <Link to='/user-dashboard' ><i><MdOutlineUpdate /></i> Update Profile</Link>
-                            </li>
-                        </ul>
-                    </div>
+        <>
+            {user.role === 1 ? (<div className="text-center">
+                <div className="list-group">
+                    <h4 onClick={() => { navigate('/dashboard') }} style={{ cursor: 'pointer' }} >Admin Panel</h4>
+                    <Link to='/dashboard/admin/create-category' className='list-group-item list-group-item-action'>
+                        Create Category
+                    </Link>
+                    <Link to='/dashboard/admin/create-product' className='list-group-item list-group-item-action'>
+                        Create Product
+                    </Link>
+                    <Link to='/dashboard/admin/order' className='list-group-item list-group-item-action'>
+                        Orders
+                    </Link>
+                    <Link to='/dashboard/admin/user' className='list-group-item list-group-item-action'>
+                        Users
+                    </Link>
                 </div>
-                <div className="dashboard-view">
+            </div>) : (<div className="text-center">
+                <div className="list-group">
+                    <h4>User Panel</h4>
+                    <Link to='/dashboard/user/profile' className='list-group-item list-group-item-action'>
+                        Profile
+                    </Link>
+                    <Link to='/dashboard/user/orders' className='list-group-item list-group-item-action'>
+                        Orders
+                    </Link>
+                    {/* <Link to='/dashboard/admin/order' className='list-group-item list-group-item-action'>
+                        Orders
+                    </Link> */}
+                </div>
+            </div>)}
 
-                </div>
-            </div>
-        </div>
+        </>
     )
 }
 
