@@ -19,11 +19,11 @@ app.use('/api/v1/auth', authRoutes)
 
 // Category Routes
 
-app.use('/api/vi/categroy', CategoryRoute)
+app.use('/api/v1/categroy', CategoryRoute)
 
 // Product Routes
 
-app.use('/api/vi/product', productRoute)
+app.use('/api/v1/product', productRoute)
 
 
 const PORT = process.env.PORT || 8000;
