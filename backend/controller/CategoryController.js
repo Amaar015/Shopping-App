@@ -1,22 +1,22 @@
 const categoryModel = require("../models/CategoryModles");
-const CategoryModles = require("../models/CategoryModles");
 const slugify = require("slugify");
 
 
 const createCategoryController = async (req, res) => {
     try {
         const { name } = req.body;
+        console.log(name)
         if (!name) {
             return res.status(400).send({ message: "Category name is required" })
         }
-        const existingCategoy = await CategoryModles.findOne({ name });
+        const existingCategoy = await categoryModel.findOne({ name });
         if (existingCategoy) {
             return res.status(200).send({
                 success: true,
                 message: "category already exisits"
             })
         }
-        const category = await new CategoryModles({ name, slug: slugify(name) }).save();
+        const category = await new categoryModel({ name, slug: slugify(name) }).save();
         res.status(201).send({
             success: true,
             message: 'new category created',
@@ -66,6 +66,7 @@ const getAllCategoriesController = async (req, res) => {
             message: "All categories here",
             categroies,
         })
+
     } catch (error) {
         console.log(error);
         res.status(500).send({

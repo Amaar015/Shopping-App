@@ -88,7 +88,7 @@ const getSingleProduct = async (req, res) => {
 
 const getProductPhoto = async (req, res) => {
     try {
-        const product = await productModle.findById(req.params.pid).select("image");
+        const product = await productModle.findById(req.params.id).select("image");
         if (product.image.data) {
             res.set("Content-type", product.image.contentType);
             return res.status(200).send(product.image.data);
@@ -121,18 +121,69 @@ const deleteProduct = async (req, res) => {
     }
 }
 
+//upate producta
 const updateProduct = async (req, res) => {
+    const slugify = require('slugify');
     try {
-        const { id } = req.params.id;
-
-
+        const { name, slug, description, price, category, quantity, shipping } = req.fields;
+        const { image } = req.files;
+        switch (true) {
+            case !name:
+                return res.status(500).send({ error: "Name is required" })
+            case !description:
+                return res.status(500).send({ error: "Description is required" })
+            case !price:
+                return res.status(500).send({ error: "Price is required" })
+            case !category:
+                return res.status(500).send({ error: "Category is required" })
+            case !quantity:
+                return res.status(500).send({ error: "Quantity is required" })
+            case image && image.size > 1000000:
+                return res.status(500).send({ error: "Image is required and it could be less than 1mb" })
+        }
+        const products = await productModle.findByIdAndUpdate(
+            req.params.id,
+            { ...req.fields, slug: slugify(name) },
+            { new: true }
+        );
+        if (image) {
+            products.image.data = fs.readFileSync(image.path);
+            products.image.contentType = image.type;
+        }
+        await products.save();
+        res.status(201).send({
+            success: true,
+            message: "Product Updated Successfully",
+            products,
+        });
     } catch (error) {
         console.log(error);
         res.status(500).send({
             success: false,
-            message: "Error in update Product",
-            error
-        })
+            error,
+            message: "Error in Updte product",
+        });
+    }
+};
+
+const ProductFilterController = async (req, res) => {
+    try {
+        const { checked, radio } = req.body;
+        let args = {};
+        if (checked.length > 0) args.category = checked;
+        if (radio.length) args.price = { $gte: radio[0], $lte: radio[1] };
+        const products = await productModle.find(args);
+        res.status(200).send({
+            success: true,
+            products,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(400).send({
+            success: false,
+            message: "Error WHile Filtering Products",
+            error,
+        });
     }
 }
 
@@ -142,5 +193,6 @@ module.exports = {
     getSingleProduct,
     updateProduct,
     getProductPhoto,
-    deleteProduct
+    deleteProduct,
+    ProductFilterController
 }
