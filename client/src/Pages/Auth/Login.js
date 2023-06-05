@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Layout from '../../Components/Layout/Layout'
 import '../../index.css'
 import axios from 'axios';
-import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import toast from "react-hot-toast";
 import { useDispatch } from 'react-redux';
 import { showLoading, hideLoading } from '../../Redux/features/alertSlice';
@@ -11,7 +11,6 @@ const Login = () => {
     const [email, setemail] = useState("")
     const [password, setpassword] = useState("")
     const navigate = useNavigate();
-    const location = useLocation();
     const handleSubmit = async (e) => {
         e.preventDefault();
 

@@ -251,4 +251,16 @@ form>button {
 
 }
 
-/* footer */
+/* product link*/
+.product-div {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  /* justify-content: center !important; */
+  padding: 2rem 0.5rem;
+
+}
+
+.product-link {
+  text-decoration: none !important;
+  color: #333 !important;
+}

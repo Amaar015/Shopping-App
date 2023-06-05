@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 
 const AdminDashboard = () => {
@@ -7,7 +7,7 @@ const AdminDashboard = () => {
     const navigate = useNavigate()
     return (
         <>
-            {user.role === 1 ? (<div className="text-center">
+            {user?.role === 1 ? (<div className="text-center">
                 <div className="list-group">
                     <h4 onClick={() => { navigate('/dashboard') }} style={{ cursor: 'pointer' }} >Admin Panel</h4>
                     <Link to='/dashboard/admin/create-category' className='list-group-item list-group-item-action'>
@@ -15,6 +15,9 @@ const AdminDashboard = () => {
                     </Link>
                     <Link to='/dashboard/admin/create-product' className='list-group-item list-group-item-action'>
                         Create Product
+                    </Link>
+                    <Link to='/dashboard/admin/products' className='list-group-item list-group-item-action'>
+                        Products
                     </Link>
                     <Link to='/dashboard/admin/order' className='list-group-item list-group-item-action'>
                         Orders

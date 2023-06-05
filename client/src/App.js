@@ -18,6 +18,8 @@ import CreateProduct from './Pages/admin/Createproduct'
 import Users from './Pages/admin/Users'
 import Profile from './Pages/user/Profile'
 import UserOrders from './Pages/user/UserOrders';
+import Products from './Pages/admin/Products';
+import UpdateProduct from './Pages/admin/UpdateProduct';
 const App = () => {
   const { loading } = useSelector(state => state.alerts)
   return (
@@ -42,6 +44,13 @@ const App = () => {
                 <CreateCategory />
               </ProtectedRoute>
             } />
+            <Route path='/dashboard/admin/products' element={
+              <ProtectedRoute>
+                <Products />
+              </ProtectedRoute>
+            } />
+
+
             <Route path='/dashboard/admin/create-product' element={
               <ProtectedRoute>
                 <CreateProduct />
@@ -52,6 +61,12 @@ const App = () => {
                 <Users />
               </ProtectedRoute>
             } />
+            <Route path='/dashboard/admin/product/:slug' element={
+              <ProtectedRoute>
+                <UpdateProduct />
+              </ProtectedRoute>
+            } />
+
 
             {/* Admin routes end */}
             {/* Users routes start */}
