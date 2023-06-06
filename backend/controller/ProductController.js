@@ -187,6 +187,42 @@ const ProductFilterController = async (req, res) => {
     }
 }
 
+const ProductCount = async (req, res) => {
+    try {
+        const total = await productModle.find({}).estimatedDocumentCount()
+        res.status(200).send({
+            success: true,
+            total,
+
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success: false,
+            message: "error in count product",
+            error,
+        })
+    }
+}
+
+// product perPage
+const ProductListController = async (req, res) => {
+    try {
+        const perPage = 3;
+        const page = req.params.page ? req.params.page : 1;
+        const products = await productModle.find({}).select('-image').skip((page - 1) * perPage).limit(perPage).sort({ createdAt: -1 })
+        res.status(200).send({
+            success: true,
+            products,
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(400).send({
+            success: false,
+            message: "error in per page"
+        })
+    }
+}
 module.exports = {
     createProductController,
     getAllProductController,
@@ -194,5 +230,7 @@ module.exports = {
     updateProduct,
     getProductPhoto,
     deleteProduct,
-    ProductFilterController
+    ProductFilterController,
+    ProductCount,
+    ProductListController
 }
