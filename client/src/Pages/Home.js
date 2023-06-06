@@ -9,6 +9,34 @@ const Home = () => {
     const [categories, setCategories] = useState([]);
     const [checked, setChecked] = useState([]);
     const [radio, setRadio] = useState([]);
+    const [total, setTotal] = useState(0);
+    const [page, setPage] = useState(1);
+    const [Loading, setLoading] = useState(false)
+    const getTotal = async () => {
+        try {
+            const { data } = await axios.get('/api/v1/product/product-count')
+            setTotal(data?.total)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const LoadMore = async () => {
+        try {
+            setLoading(true);
+            const { data } = await axios.get(`/api/v1/product/product-list/${page}`)
+            setLoading(false)
+            setProduct([...product, ...data?.products])
+        } catch (error) {
+            setLoading(false);
+            console.log(error);
+        }
+    }
+    useEffect(() => {
+        if (page === 1) return
+        LoadMore()
+    }, [page])
+
     //   get all categories
     const getAllCategory = async () => {
         try {
@@ -22,14 +50,18 @@ const Home = () => {
     }
     useEffect(() => {
         getAllCategory()
+        getTotal();
     }, []);
 
 
     const getAllproduct = async () => {
         try {
-            const { data } = await axios.get('/api/v1/product/getallproduct')
-            setProduct(data.product)
+            setLoading(true);
+            const { data } = await axios.get(`/api/v1/product/product-list/${page}`)
+            setLoading(false)
+            setProduct(data.products)
         } catch (error) {
+            setLoading(false)
             console.log(error);
         }
     }
@@ -82,9 +114,11 @@ const Home = () => {
                             ))}
                         </Radio.Group>
                     </div>
+                    <div className="btn btn-danger mt-5" onClick={() => window.location.reload()}>
+                        Reset Filter
+                    </div>
                 </div>
                 <div className="col-md-9">
-                    {JSON.stringify(radio, null, 4)}
                     <h1 className="text-center">All Products</h1>
                     <div className="d-flex flex-wrap">
                         {product.map(p => (
@@ -102,6 +136,19 @@ const Home = () => {
                                 </div>
                             </Link>
                         ))}
+                    </div>
+                    <div className='m-2 p-3'>
+                        {product && product.length < total && (
+                            <button className='btn btn-warning'
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    setPage(page + 1)
+                                }}>
+                                {Loading ? 'Loading...' : 'LoadMore'}
+
+                            </button>
+                        )}
+
                     </div>
                 </div>
             </div>
