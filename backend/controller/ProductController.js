@@ -223,6 +223,44 @@ const ProductListController = async (req, res) => {
         })
     }
 }
+
+const SearchRoute = async (req, res) => {
+    try {
+        const { keyword } = req.params;
+        const result = await productModle.find({
+            $or: [
+                { name: { $regex: keyword, $options: "i" } },
+                { description: { $regex: keyword, $options: "i" } }
+            ]
+        }).select("-image")
+        res.json(result)
+    } catch (error) {
+        console.log(error)
+        res.status(400).send({
+            success: false,
+            message: "Error in search Product",
+            error,
+        })
+    }
+}
+
+// RelativeProductController
+const RelativeProductController = async (req, res) => {
+    try {
+        const { pid, cid } = req.params;
+        const products = await productModle.find({
+            category: cid,
+            _id: { $ne: pid }
+        }).select('-image').limit(4).populate('category')
+        res.status(200).send({
+            success: false,
+            products,
+        })
+        console.log(pid + " " + cid);
+    } catch (error) {
+        console.log(error);
+    }
+}
 module.exports = {
     createProductController,
     getAllProductController,
@@ -232,5 +270,7 @@ module.exports = {
     deleteProduct,
     ProductFilterController,
     ProductCount,
-    ProductListController
+    ProductListController,
+    SearchRoute,
+    RelativeProductController
 }

@@ -1,5 +1,5 @@
 const express = require('express');
-const { createProductController, getAllProductController, getSingleProduct, updateProduct, getProductPhoto, deleteProduct, ProductFilterController, ProductCount, ProductListController } = require('../controller/ProductController');
+const { createProductController, getAllProductController, getSingleProduct, updateProduct, getProductPhoto, deleteProduct, ProductFilterController, ProductCount, ProductListController, SearchRoute, RelativeProductController } = require('../controller/ProductController');
 const formidable = require('express-formidable');
 const { IsAdmin } = require('../midelwares/authMiddleware');
 const router = express.Router();
@@ -29,4 +29,11 @@ router.get('/product-count', ProductCount)
 
 // product per page
 router.get('/product-list/:page', ProductListController)
+// Searh Product
+router.get('/search/:keyword', SearchRoute);
+// related product
+
+router.get('/relative-product/:pid/:cid', RelativeProductController);
+
+
 module.exports = router;
