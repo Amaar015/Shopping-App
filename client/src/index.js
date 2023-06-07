@@ -8,16 +8,19 @@ import { Provider } from 'react-redux';
 import store from './Redux/store';
 import 'antd/dist/reset.css';
 import { SearchProvider } from './Redux/search'
+import { CartProvider } from './Redux/cart';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
   <Provider store={store}>
-    <SearchProvider>
-      {/* <BrowserRouter> */}
+    <CartProvider>
+      <SearchProvider>
+        {/* <BrowserRouter> */}
 
-      <App />
-      {/* </BrowserRouter> */}
-    </SearchProvider>
+        <App />
+        {/* </BrowserRouter> */}
+      </SearchProvider>
+    </CartProvider>
   </Provider>
 );
 

@@ -22,6 +22,9 @@ import Products from './Pages/admin/Products';
 import UpdateProduct from './Pages/admin/UpdateProduct';
 import Searchs from './Pages/Searchs';
 import ProductDetails from './Pages/ProductDetails';
+import Categories from './Pages/Categories';
+import CategoryProduct from './Components/CategoryProduct';
+import Cart from './Pages/Cart';
 const App = () => {
   const { loading } = useSelector(state => state.alerts)
   return (
@@ -50,6 +53,22 @@ const App = () => {
               <ProductDetails />
               // </ProtectedRoute>
             } />
+            <Route path='/cart' element={
+              <ProtectedRoute>
+                <Cart />
+              </ProtectedRoute>
+            } />
+            <Route path='/category/:slug' element={
+              // <ProtectedRoute>
+              <CategoryProduct />
+              // </ProtectedRoute>
+            } />
+            <Route path='/categories' element={
+              // <ProtectedRoute>
+              <Categories />
+              // </ProtectedRoute>
+            } />
+
             {/* Admin routes start */}
             <Route path='/dashboard/admin/create-category' element={
               <ProtectedRoute>
@@ -68,6 +87,7 @@ const App = () => {
                 <CreateProduct />
               </ProtectedRoute>
             } />
+
             <Route path='/dashboard/admin/user' element={
               <ProtectedRoute>
                 <Users />
