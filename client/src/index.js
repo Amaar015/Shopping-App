@@ -7,14 +7,17 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './Redux/store';
 import 'antd/dist/reset.css';
-
+import { SearchProvider } from './Redux/search'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <Provider store={store}>
-    {/* <BrowserRouter> */}
 
-    <App />
-    {/* </BrowserRouter> */}
+  <Provider store={store}>
+    <SearchProvider>
+      {/* <BrowserRouter> */}
+
+      <App />
+      {/* </BrowserRouter> */}
+    </SearchProvider>
   </Provider>
 );
 

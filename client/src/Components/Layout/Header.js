@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { toast } from 'react-hot-toast';
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../../index.css'
+import SearchInput from '../form/SearchInput';
 const Header = () => {
     const { user } = useSelector(state => state.user)
     const location = useLocation();
@@ -26,6 +27,7 @@ const Header = () => {
                     <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
                         <Link to='/' className="navbar-brand" >Abdullah <FaOpencart /></Link>
                         <ul className="navbar-nav  mb-2 mb-lg-0 ">
+                            <SearchInput />
                             <li className="nav-item">
                                 <Link to='/' className="nav-link " >Home</Link>
                             </li>

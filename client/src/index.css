@@ -18,7 +18,7 @@
 }
 
 .collapse ul {
-  margin-left: 35rem;
+  margin-left: 10rem;
 }
 
 .nav-link {
@@ -35,12 +35,14 @@
   font-weight: 700;
   font-family: 'roboto', sans-serif;
   letter-spacing: 3px;
+
 }
 
 ul {
   display: flex;
   gap: 1rem;
   justify-content: center;
+  margin-top: 1rem !important;
 }
 
 ul li {
@@ -204,7 +206,7 @@ form>button {
 
 .admin {
   position: absolute;
-  top: 0.5rem;
+  top: 1rem;
   left: 90%;
   margin-left: 2rem;
   text-transform: capitalize;
@@ -263,4 +265,9 @@ form>button {
 .product-link {
   text-decoration: none !important;
   color: #333 !important;
+}
+
+
+.search {
+  margin-top: -2rem;
 }

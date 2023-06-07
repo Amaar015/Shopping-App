@@ -20,6 +20,8 @@ import Profile from './Pages/user/Profile'
 import UserOrders from './Pages/user/UserOrders';
 import Products from './Pages/admin/Products';
 import UpdateProduct from './Pages/admin/UpdateProduct';
+import Searchs from './Pages/Searchs';
+import ProductDetails from './Pages/ProductDetails';
 const App = () => {
   const { loading } = useSelector(state => state.alerts)
   return (
@@ -37,6 +39,16 @@ const App = () => {
               <ProtectedRoute>
                 <Dashboard />
               </ProtectedRoute>
+            } />
+            <Route path='/search' element={
+              // <ProtectedRoute>
+              <Searchs />
+              // </ProtectedRoute>
+            } />
+            <Route path='/product/:slug' element={
+              // <ProtectedRoute>
+              <ProductDetails />
+              // </ProtectedRoute>
             } />
             {/* Admin routes start */}
             <Route path='/dashboard/admin/create-category' element={
