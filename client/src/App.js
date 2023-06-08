@@ -54,9 +54,9 @@ const App = () => {
               // </ProtectedRoute>
             } />
             <Route path='/cart' element={
-              <ProtectedRoute>
-                <Cart />
-              </ProtectedRoute>
+              // <ProtectedRoute>
+              <Cart />
+              // </ProtectedRoute>
             } />
             <Route path='/category/:slug' element={
               // <ProtectedRoute>
