@@ -2,6 +2,7 @@ const { hashPassword, comparePassword } = require('../helpers/authHelpers');
 const userModel = require('../models/userModels')
 const jwt = require('jsonwebtoken')
 const dotenv = require('dotenv')
+
 dotenv.config();
 
 const registerController = async (req, res) => {
@@ -177,10 +178,40 @@ const forgetPasswordController = async (req, res) => {
     }
 }
 
+const updateProfileController = async (req, res) => {
+    try {
+        const { name, email, phone, address, password, id } = req.body;
+        const { user } = await userModel.findById(id)
+        // 
+        if (!password && password.length < 6) {
+            return res.json({ error: "Password is required and 6 character long" })
+        }
+        const hashedPassword = password ? await hashPassword(password) : undefined;
+        const updateduser = await userModel.findByIdAndUpdate(id, {
+            name: name || user.name,
+            password: password || user.password,
+            phone: phone || user.phone,
+            address: address || user.address
+        }, { new: true })
+        res.status(200).send({
+            success: true,
+            message: "User Updated Successfully",
+            updateduser,
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(400).send({
+            message: false,
+            success: "Error in update profile",
+            error
+        })
+    }
+}
 
 module.exports = {
     registerController,
     LoginController,
     authController,
-    forgetPasswordController
+    forgetPasswordController,
+    updateProfileController
 };
