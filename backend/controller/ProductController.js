@@ -1,6 +1,7 @@
 
 const fs = require('fs');
 const productModle = require('./../models/ProductModle');
+const categoryModle = require('./../models/CategoryModles')
 const createProductController = async (req, res) => {
     const slugify = require('slugify');
     try {
@@ -261,6 +262,23 @@ const RelativeProductController = async (req, res) => {
         console.log(error);
     }
 }
+const ProductCategoryController = async (req, res) => {
+    try {
+        const category = await categoryModle.find({ slug: req.params.slug })
+        const product = await productModle.find({ category }).populate("category")
+        res.status(200).send({
+            success: true,
+            product,
+            category,
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success: false,
+            error,
+        })
+    }
+}
 module.exports = {
     createProductController,
     getAllProductController,
@@ -272,5 +290,6 @@ module.exports = {
     ProductCount,
     ProductListController,
     SearchRoute,
-    RelativeProductController
+    RelativeProductController,
+    ProductCategoryController
 }

@@ -56,11 +56,7 @@ const updateCategoryController = async (req, res) => {
 const getAllCategoriesController = async (req, res) => {
     try {
         const categroies = await categoryModel.find();
-        if (!categroies) {
-            return res.status(400).send({
-                message: "Categories dose not exists",
-            })
-        }
+
         res.status(200).send({
             success: true,
             message: "All categories here",
