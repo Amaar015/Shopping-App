@@ -29,7 +29,7 @@ const AdminDashboard = () => {
             </div>) : (<div className="text-center">
                 <div className="list-group">
                     <h4>User Panel</h4>
-                    <Link to='/dashboard/user/profile' className='list-group-item list-group-item-action'>
+                    <Link to={`/dashboard/user/profile/${user?._id}`} className='list-group-item list-group-item-action'>
                         Profile
                     </Link>
                     <Link to='/dashboard/user/orders' className='list-group-item list-group-item-action'>

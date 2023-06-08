@@ -102,7 +102,7 @@ const App = () => {
 
             {/* Admin routes end */}
             {/* Users routes start */}
-            <Route path='/dashboard/user/profile' element={
+            <Route path='/dashboard/user/profile/:id' element={
               <ProtectedRoute>
                 <Profile />
               </ProtectedRoute>
